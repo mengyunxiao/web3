@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>标题</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<style>
+		.tx{width: 160px;height: 160px;background: url(../tu/2.jpg) 0 0 no-repeat;border-radius: 50%;margin: 100px auto;-webkit-animation:zhuan 10s linear infinite;}
+		@-webkit-keyframes zhuan{
+			0%{-webkit-transform:rotateZ(0deg);}
+			100%{-webkit-transform:rotateZ(360deg);}
+		}
+		.bt{margin: 0 auto;font-size: 30px;text-align: center;margin-top: 20px;-webkit-animation:bian 10s linear infinite;}
+		@-webkit-keyframes bian{
+			0%{color: red;}
+			20%{color: orange;}
+			40%{color: blue;}
+			60%{color: yellow;}
+			80%{color: green;}
+			100%{color: green;}
+		}
+		.slip{width: 600px;margin: 0 auto;border: 1px solid gray;border-radius: 5px;height: 20px;background: #dedede;position: relative;}
+		#hk{position: absolute;left: 0px;top:-19px;width: 30px;height: 25px;background: #666; border-radius: 5px;}
+		.an{width: 500px;height: 128px;margin: 10px auto; }
+		.p1{width: 128px;height: 128px;background: url(an1.png) 0 0 no-repeat;float: left;margin-right: 15px;cursor: pointer;}
+		.p2{width: 128px;height: 128px;background: url(an2.png) 0 0 no-repeat;float: left;margin-right: 15px;cursor: pointer;}
+		.p3{width: 128px;height: 128px;background: url(an3.png) 0 0 no-repeat;float: left;margin-right: 15px;cursor: pointer;}
+	</style>
+</head>
+<body>
+	<div class="tx"></div>
+	<audio  loop id="aud">
+		<source src="卷珠帘.mp3"></source>
+	</audio>
+	<div class="slip" id="slip">
+		<p class="hk" id="hk"></p>
+	</div>
+	<div class="bt">卷珠帘</div>
+	<div class="an">
+		<p class="p1" id="p1"></p>
+		<p class="p2" id="p2"></p>
+		<p class="p3" id="p3"></p>
+	</div>
+	<script>
+		var slip=document.getElementById('slip');
+		var hk=document.getElementById('hk');
+		var aud=document.getElementById('aud');
+		var p1=document.getElementById('p1');
+		var p2=document.getElementById('p2');
+		var p3=document.getElementById('p3');
+		var timer,a=0;
+		// alert(aud.duration);
+		p1.onclick=function() {
+			if(aud.paused){
+				aud.play();
+				clearInterval(timer);
+				timer=setInterval(function() {
+					a+=0.002;
+					if(a>=570){
+						clearInterval(timer);
+						a=570;
+					}
+					hk.style.left=a+'px';
+				},1)
+			}
+		}
+		p2.onclick=function() {
+			if(aud.paused==0){
+				aud.pause();
+				clearInterval(timer);
+			}
+		}
+		p3.onclick=function() {
+			clearInterval(timer);
+			hk.style.left=0+'px';
+			aud.currentTime=0;
+			aud.pause();
+		}
+	</script>
+</body>
+</html>
